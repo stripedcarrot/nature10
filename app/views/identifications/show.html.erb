@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+
+
+  <%#= @picture.inspect %>
+
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @identification.user_id %>
+</p>
+<%= image_tag identification.avatar.url(:thumb) %>
+<p>
+  <b>Title:</b>
+  <%= @identification.title %>
+</p>
+
+<%if current_user.admin? %>
+<%= link_to 'Edit', edit_identification_path(@identification) %> |
+    <%end%>
+<%= link_to 'Back', identifications_path %>
+
+

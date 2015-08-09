@@ -1,0 +1,59 @@
+<div class="page-header">
+  <h1 id = "geoheader">Geolocate</h1>
+
+</div>
+
+
+
+<div id="mapcanvas" style="width:800px;height:700px;" >
+</div>
+
+<script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuYer5Veg6dpOrtSuJm5hUPmdIfNhzVfk&sensor=false">
+</script>
+<script>
+    var mapOptions = {
+        zoom: 2,
+        center: new google.maps.LatLng(53.3428, -6.2674),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById('mapcanvas'), mapOptions);
+
+    <% @photos.each do |photo| %>
+    var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(<%= photo.lat %>, <%= photo.long %>),
+        map: map,
+        title: "<%= photo.title %>"
+    });
+    <% end %>
+
+</script>
+      <br/>     <br/>
+<table>
+  <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+
+
+    <th>Long</th>
+    <th>Lat</th>
+    <th>Title</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @photos.each do |photo| %>
+      <tr class>
+        <td><%= photo.long %></td>
+        <td><%= photo.lat %></td>
+        <td><%= photo.path_photo %></td>
+        <td><%= photo.title %></td>
+        <td><%= photo.user_id %></td>
+        <td><%= image_tag photo.avatar.url(:thumb) %>   </td>
+
+        <td><%= link_to 'Show', photo, :class => "btn btn-turquoise" %></td>
+        <td><%= link_to 'Edit', edit_photo_path(photo), :class => "btn btn-green"%></td>
+        <td><%= link_to 'Destroy', photo, method: :delete, data: { confirm: 'Are you sure?' },:class => "btn btn-redpink" %></td>
+      </tr>
+  <% end %>
+</table>

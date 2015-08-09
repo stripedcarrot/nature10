@@ -1,0 +1,136 @@
+<div class="page-header">
+  <h1><%= @photo.title %></h1>
+  </div>
+<div>
+  <%= link_to("| First ", Photo.first, class: "links-float btn btn-green") %>
+  <%= link_to("<< Previous", @photo.previous,class: "links-float btn btn-turquoise") %>
+  <%= link_to("Next >>", @photo.next, class: "links-float btn btn-lightblue") %>
+
+  <%= link_to("Last |", Photo.last, class: "links-float btn btn-redpink") %>
+</div>
+
+
+<%= image_tag @photo.avatar.url %>
+<div id="show_main">
+  <table>
+    <tr>
+      <th colspan ="2" class = "list_content_head"><%= @photo.title %></th>
+    </tr>
+    <tr class="list_line_odd ">
+      <td class = "list_content">Description</td>
+      <td class = "list_text "><%= @photo.description %></td>
+    <tr>
+
+    <tr class="list_line_even">
+      <td class = "list_content">Identification</td>
+      <td class = "list_text"><%= @photo.classification %></td>
+    </tr>
+
+
+    <tr class="list_line_even">
+      <td class = "list_content">Submitted By</td>
+      <td class = "list_text"><%= @photo.username %></td>
+    </tr>
+
+
+  </table>
+
+</div>   <!--end show main-->
+<br />
+<div>
+  <% if current_user and current_user.admin %>
+      <%= link_to 'Edit Photo', edit_photo_path(@photo), class: "btn btn-yellow btn-large" %> &nbsp;
+
+  <% end %>
+
+</div>
+<div id="comment">
+
+  <h2>Your Comments</h2>
+
+  <table>
+
+    <%  @photocomments.each do |comment| %>
+        <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+
+          <td class = "list_text_comment"><%= sanitize comment.text %></td>
+
+          <td class = "list_text_comment_small"> <%= comment.username%>        </td>
+
+          <td class = "list_text_comment_small"><%= time_ago_in_words(comment.created_at) + " ago" %></td>
+
+          <% if current_user and current_user.admin %>
+
+              <td><%= link_to 'Edit Comment', edit_comment_path(comment.id), class: "btn btn-purple btn-small" %></td>
+
+          <% end %>
+
+
+
+        </tr>
+    <% end %>
+
+
+  </table>
+
+  <div class="flickr_pagination">
+    <div class="page_info">
+      <%= page_entries_info @photocomments %>
+    </div>
+
+    <%= will_paginate  @photocomments %>
+    <div>
+      <%= link_to 'Edit All Comments', comments_path, class: "btn btn-purple btn-large" %>
+    </div>
+  </div>
+
+  <%= form_for([@photo, @photo.comments.build]) do |f| %>
+      <div class="field">
+        <%= f.hidden_field :user_id %>
+        <%= f.hidden_field :photo_id %>
+      </div>
+      <div class="field">
+        <%= f.label :text %>
+        <br/>
+        <%= f.text_area :text, size: "300x10" %>
+      </div>
+      <div class="actions"><br/>
+        <%= f.submit "Add Your Comment", class: "btn btn-pink btn-large" %>
+      </div>
+  <% end %>
+
+</div> <!-- end comment div -->
+
+  <div id="right">
+    <div id="mapcanvas" style="width:400px;height:300px;" >
+    </div>
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuYer5Veg6dpOrtSuJm5hUPmdIfNhzVfk&sensor=false">
+    </script>
+    <script>
+        var mapOptions = {
+            zoom: 2,
+            center: new google.maps.LatLng(<%= @photo.lat %>, <%= @photo.long %>),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById('mapcanvas'), mapOptions);
+
+
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(<%= @photo.lat %>, <%= @photo.long %>),
+            map: map,
+            title: "<%= @photo.title %>"
+        });
+
+
+    </script>
+    <p>
+      <b>Long:</b>
+      <%= @photo.long %>
+
+      <b>Lat:</b>
+      <%= @photo.lat %>
+    </p>
+  </div>
+<%= link_to 'Back', photos_path, class: "btn btn-green btn-medium"  %>
+</div>

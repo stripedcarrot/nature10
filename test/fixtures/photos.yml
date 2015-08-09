@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  long: 
+  lat: 
+  path_photo: MyString
+  title: MyString
+  user_id: 
+
+two:
+  long: 
+  lat: 
+  path_photo: MyString
+  title: MyString
+  user_id: 

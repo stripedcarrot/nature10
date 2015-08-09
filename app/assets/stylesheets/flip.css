@@ -1,0 +1,53 @@
+.wrapper{
+                width:400px;
+                height:300px;
+                padding:20px;
+                -webkit-perspective: 1000;
+                -moz-perspective: 1000;
+                 position:relative;
+                 
+        }
+        .wrapper:hover .photo{
+            -webkit-transform: rotateY(180deg);
+            -moz-transform: rotateY(180deg);
+     
+        }
+        .photo{
+            -webkit-transition: all 1.0s linear;
+            -webkit-transform-style: preserve-3d;
+            -moz-transition: all 1.0s linear;
+            -moz-transform-style: preserve-3d;   
+        }
+        .photo img{
+            width:400px;    
+        }
+
+        .face{
+                position: absolute;
+                width: 400px;
+                height: 330px;
+                -webkit-backface-visibility: hidden;
+                -moz-backface-visibility: hidden;
+				padding:5px;
+                 }
+ 
+        .back{
+            position: absolute;
+                        top:0;
+            display:block;
+           
+            -webkit-transform: rotateY(180deg); 
+            
+             
+            -moz-transform: rotateY(180deg);    
+            
+             
+            text-align:center;
+            color:white;
+            padding:5px;
+        }
+         
+        body{
+            font-family:Helvetica;
+             
+        }

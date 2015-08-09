@@ -1,0 +1,2 @@
+module PhotoplayHelper
+end

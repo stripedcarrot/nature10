@@ -1,0 +1,54 @@
+<div class="page-header">
+<h1>Top 5 Photographs</h1>
+        </div>
+<div id="carousel_blue-id" class="carousel slide"><!-- class of slide for animation -->
+  <div class="carousel-inner">
+    <div class="item active"><!-- class of active since it's the first item -->
+      <a><%= image_tag "1.jpg", alt: "sunflower" %></a>
+      <div class="carousel-caption">
+        <p>Sunflower</p>
+      </div>
+    </div>
+    <div class="item">
+      <a><%= image_tag "2.jpg", alt: "palm" %></a>
+      <div class="carousel-caption">
+        <p>Palm</p>
+      </div>
+    </div>
+    <div class="item">
+
+      <a><%= image_tag("3.jpg", alt: "cherries" )%></a>
+      <div class="carousel-caption">
+        <p>Crab apple</p>
+      </div>
+    </div>
+    <div class="item">
+      <a> <%= image_tag "4.jpg", alt: "beach scene" %></a>
+      <div class="carousel-caption">
+        <p>On the beach</p>
+      </div>
+    </div>
+    <div class="item">
+      <a> <%= image_tag "6.jpg", alt: "Lavender" %></a>
+      <div class="carousel-caption">
+        <p>Lavender</p>
+      </div>
+    </div>
+  </div><!-- /.carousel-inner -->
+  <!--  <a title="Click to Continue > by safesaver" id="_GPLITA_1" style="text-decoration:underline" href="#" in_rurl="http://i.tracksrv.com/click?v=SUU6MjMyMzk6MTE0NTpuZXh0OjdhYTkwZmJmNGYyMzE3MzFjYzdlZGJmMmNkMjQ0MzEzOnotMTU0My0yOTI1NjI6d2ViZGVzaWduLnR1dHNwbHVzLmNvbTowOjA" sl-processed="1">Next</a> and Previous controls below
+        href values must reference the id for this carousel -->
+  <a class="carousel-control left" href="#carousel_blue-id" data-slide="prev">&lsaquo;</a>
+  <a class="carousel-control right" href="#carousel_blue-id" data-slide="next">&rsaquo;</a>
+</div><!-- /.carousel -->
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/jquery-1.7.2.min.js"><\/script>')</script>
+<script>
+    $(document).ready(function(){
+        $('.carousel').carousel({
+            interval: 1000
+        });
+    });
+</script>
+<script src="js/bootstrap.min.js"></script>

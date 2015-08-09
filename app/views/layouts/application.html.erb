@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nature</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="navbar  navbar-fixed-top">
+  <div class="navbar-inner ">
+    <div class="container">
+
+    </div>
+    <ul class="nav">
+      <li><%=link_to "Home", root_path%></li>
+      <li><%=link_to "Photos", photos_path%></li>
+      <li><%=link_to "Photoplay",photoplay_path%></li>
+      <li> <%=  link_to "Geolocate", geolocate_path %> </li>
+      <li> <%=  link_to "Top 5", identifications_path %> </li>
+
+      <% if current_user and current_user.admin %>
+          <li><%=link_to "Comments", comments_path %></li>
+
+      <% end %>
+
+      <li><% if user_signed_in? %>
+          <li><%= link_to 'Upload Photo', new_photo_path%></li>
+          <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+      <% else %>
+          <li><%= link_to "Sign up", new_user_registration_path %> </li>
+          <li> <%= link_to "Sign in", new_user_session_path %> </li>
+          <li><%= link_to "Forgot Password?",  new_password_path(resource_name) %></li>
+      <% end %>
+
+
+    </ul>
+
+    <div id="welcome">
+
+      <% if user_signed_in? %>
+          Signed in as <%= current_user.email %>
+          <% if current_user.admin? %>
+
+              (administrator)
+
+          <% end %>
+      <% end %>
+    </div>
+  </div>
+
+
+
+</div>
+
+<div class ="hero-unit">
+
+  <div id="siteLogo">
+
+  </div>
+
+</div>
+
+
+
+
+<div>
+  <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, :id => "flash_#{name}" %>
+  <% end %>
+</div>
+
+
+<div class="container">
+  <%= yield %>
+</div>
+</body>
+</html>
